@@ -16,15 +16,23 @@ let producto1 = {
 
 let array = []
 
-boton.addEventListener("click", () => {
-    let totalActual = parseFloat(total.textContent);
-    
-    // Sumar el precio del producto al total actual
-    totalActual += producto1.precio;
+let precioTotal = 0
 
-    // Asignar el nuevo total al contenido de total.textContent
-    total.textContent = totalActual;
+boton.addEventListener("click", () => {
+    let precio = parseInt(producto1.precio)
+    precioTotal += precio
+    total.textContent = "TOTAL: $" + precioTotal
     let nuevoLi = document.createElement("li")
     nuevoLi.textContent = "Madera tirantes"
     ul.appendChild(nuevoLi)
+    array.push(precioTotal)
+    localStorage.setItem("producto-1", JSON.stringify(array))
+    console.log(array)
+})
+
+
+
+window.addEventListener("DOMContentLoaded", () => {
+    let presio = JSON.parse(localStorage.getItem("producto-1"))
+    total.textContent = "TOTAL: $" + presio
 })
